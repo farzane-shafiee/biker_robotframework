@@ -1,0 +1,6 @@
+appium:
+  platformName: "Android"
+  deviceName: "emulator-5554"
+  appPackage: "com.zoodfood.express.stage"
+  appActivity: "com.zoodfood.express.ui.login.LoginActivity"
+  android_automation: "UIAutomator2"
