@@ -3,7 +3,7 @@ Library        AppiumLibrary
 Resource       ../../resources/base_config.robot
 Variables      ../../resources/login_page/data_variables.py
 Variables      ../../resources/login_page/locators_variables.py
-Library        ../../resources/login_page/api_otp.py
+Library        ../../resources/login_page/login_api.py
 
 Suite Setup       start suite
 Test Setup        start test case
@@ -24,7 +24,8 @@ test search robot
 
     Wait Until Page Contains Element    ${otp_page_label}
 
-    ${otp}    Get Otp From Api
+    ${token}    Get Token
+    ${otp}    Get Otp From Api   ${token}
     Log To Console   ${otp}
     Input Text       ${otp_input}   ${otp}
     Click Element    ${submit_login_button}
