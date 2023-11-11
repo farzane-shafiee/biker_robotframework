@@ -1,5 +1,5 @@
 import requests
-from data_variables import username, phone_number
+from data_variables import username, mobile_number_valid
 
 BASE_URL = "https://express-api-staging.snappfood.dev"
 
@@ -7,7 +7,7 @@ BASE_URL = "https://express-api-staging.snappfood.dev"
 def get_token():
     url = f"{BASE_URL}/mobile/user/api-login"
 
-    payload = f'password={phone_number}&username={username}'
+    payload = f'password={mobile_number_valid}&username={username}'
     headers = {
         'Accept': 'application/json, text/plain, */*',
         'Accept-Language': 'en-US,en;q=0.9,fa;q=0.8',
@@ -23,7 +23,6 @@ def get_token():
 
     response = requests.request("POST", url, headers=headers, data=payload)
     token = response.json()['token']
-    print(token)
     return token
 
 
@@ -49,5 +48,4 @@ def get_otp_from_api(token):
     }
 
     response = requests.request("GET", url, headers=headers, data=payload)
-    # print(response.json()['lastOtps'])
     return response.json()['lastOtps']
