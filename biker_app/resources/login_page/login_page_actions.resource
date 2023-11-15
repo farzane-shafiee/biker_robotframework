@@ -23,7 +23,7 @@ insert otp to input
     [Arguments]    ${otp}
     Input Text                          ${otp_input}              ${otp}
 
-get otp
+set otp from api
     ${token}                            Get Token
     Get Otp From Api                    ${token}
 
