@@ -9,38 +9,44 @@ Suite Teardown    end suite
 *** Test Cases ***
 
 login by valid mobile number
-    Insert Phone Number To Input    ${mobile_number_valid}
-    Click Continue Button
-    Assert Otp Page
-    Insert Otp To Input             Set Otp From Api
-    Click Confirm Button Login
+    [Documentation]    Login by valid mobile number is successfully.
+    Enter The Phone Number Into The Input    ${mobile_number_valid}
+    Click On The Continue Button
+    Assert Valid Phone Number
+    Enter The Otp Into The Input             Set The Otp From Api
+    Click On The Confirm Button
     Assert Valid Login
 
 login by wrong mobile number  # 09190
-    Insert Phone Number To Input    ${mobile_number_wrong}
-    Click Continue Button
+    [Documentation]    Login by wrong mobile number and dees not login.
+    Enter The Phone Number Into The Input    ${mobile_number_wrong}
+    Click On The Continue Button
     Assert Wrong Phone Number
 
 login by invalid mobile number  # 09150560098
-    Insert Phone Number To Input    ${mobile_number_invalid}
-    Click Continue Button
+    [Documentation]    Login by invalid mobile number and dees not login.
+    Enter The Phone Number Into The Input    ${mobile_number_invalid}
+    Click On The Continue Button
     Assert Invalid Phone Number
 
 login by Null mobile number
-    Click Continue Button
+    [Documentation]    Login by null mobile number and dees not login.
+    Click On The Continue Button
     Assert Wrong Phone Number
 
 login by invalid otp
-    Insert Phone Number To Input    ${mobile_number_valid}
-    Click Continue Button
-    Assert Otp Page
-    Insert Otp To Input             ${otp_invalid}
-    Click Confirm Button Login
+    [Documentation]    Login by invalid OTP and dees not login.
+    Enter The Phone Number Into The Input    ${mobile_number_valid}
+    Click On The Continue Button
+    Assert Valid Phone Number
+    Enter The Otp Into The Input             ${otp_invalid}
+    Click On The Confirm Button
     Assert Invalid Otp
 
 login by Null Otp
-    Insert Phone Number To Input    ${mobile_number_valid}
-    Click Continue Button
-    Assert Otp Page
-    Click Confirm Button Login
+    [Documentation]    Login by null OTP and dees not login.
+    Enter The Phone Number Into The Input    ${mobile_number_valid}
+    Click On The Continue Button
+    Assert Valid Phone Number
+    Click On The Confirm Button
     Assert Null Otp

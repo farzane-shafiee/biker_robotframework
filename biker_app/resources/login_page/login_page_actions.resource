@@ -5,29 +5,30 @@ Resource       ../base_config/base_config.resource
 Library        login_keywords_python_library.py
 
 *** Keywords ***
-insert phone number to input
+
+enter the phone number into the input
     [Arguments]    ${phone_number}
     Wait Until Page Contains Element    ${phone_number_input}     timeout=10s
     Input Text                          ${phone_number_input}     ${phone_number}
     Wait Until Page Contains Element    ${cross_button}
 
-click continue button
+click on the continue button
     Click Element                       ${continue_button}
 
-assert otp page
+assert valid phone number
     ${text_otp_page}                    Get Text                  ${otp_page_label}
     ${phone_number}                     Get Part Of Text          ${text_otp_page}
     Should be equal as strings          ${phone_number}           ${mobile_number_valid}
 
-insert otp to input
+enter the otp into the input
     [Arguments]    ${otp}
     Input Text                          ${otp_input}              ${otp}
 
-set otp from api
+set the otp from api
     ${token}                            Get Token
     Get Otp From Api                    ${token}
 
-click confirm button login
+click on the confirm button
     Click Element                       ${confirm_login_button}
     Activate App Locations
 
