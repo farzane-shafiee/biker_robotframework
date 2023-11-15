@@ -49,3 +49,8 @@ def get_otp_from_api(token):
 
     response = requests.request("GET", url, headers=headers, data=payload)
     return response.json()['lastOtps']
+
+
+def get_part_of_text(text):
+    print(text[25:37])
+    return text[25:37]
