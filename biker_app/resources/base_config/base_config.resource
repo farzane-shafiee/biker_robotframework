@@ -1,8 +1,6 @@
 *** Settings ***
 Library    AppiumLibrary
-Library    Collections
 Variables  base_variables.py
-#Variables  data_device.yaml
 
 *** Variables ***
 
@@ -22,6 +20,6 @@ start test case
 
 end test case
     Log To Console    ************* End the test **************
-
+    
 end suite
     Log To Console    ************* End the suite **************
