@@ -1,11 +1,10 @@
 *** Settings ***
-Variables      ../../resources/login_page/locators_variables.py
-Variables      ../../resources/login_page/data_variables.py
+Variables      locators_variables.py
+Variables      data_variables.py
 Resource       ../base_config/base_config.resource
-Library        login_keywords_python_library.py
+Library        ${CURDIR}/login_keywords_python_library.py
 
 *** Keywords ***
-
 enter the phone number into the input
     [Arguments]    ${phone_number}
     Wait Until Page Contains Element    ${phone_number_input}     timeout=10s
@@ -16,6 +15,7 @@ click on the continue button
     Click Element                       ${continue_button}
 
 assert valid phone number
+    Wait Until Page Contains Element    ${otp_page_label}
     ${text_otp_page}                    Get Text                  ${otp_page_label}
     ${phone_number}                     Get Part Of Text          ${text_otp_page}
     Should be equal as strings          ${phone_number}           ${mobile_number_valid}
@@ -24,13 +24,13 @@ enter the otp into the input
     [Arguments]    ${otp}
     Input Text                          ${otp_input}              ${otp}
 
-set the otp from api
+get otp
     ${token}                            Get Token
-    Get Otp From Api                    ${token}
+    ${otp}                              Get Otp From Api          ${token}
+    RETURN      ${otp}
 
 click on the confirm button
     Click Element                       ${confirm_login_button}
-    Activate App Locations
 
 assert valid login
     Wait Until Page Contains Element    ${assert_login_valid}
@@ -39,9 +39,9 @@ assert valid login
 activate app locations
     Wait Until Page Contains Element    ${location_button}
     Click Element                       ${location_button}
-    Sleep    1s
+    Wait Until Page Contains Element    ${location_button2}
     Click Element                       ${location_button2}
-    Sleep    1s
+    Wait Until Page Contains Element    ${click_fake}
     Click Element                       ${click_fake}
     Click Element                       ${click_fake}
     Click Element                       ${click_fake}

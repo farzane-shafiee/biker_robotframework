@@ -7,14 +7,15 @@ Test Teardown     close biker app
 Suite Teardown    end suite
 
 *** Test Cases ***
-
 login by valid mobile number
     [Documentation]    Login by valid mobile number is successfully.
     Enter The Phone Number Into The Input    ${mobile_number_valid}
     Click On The Continue Button
     Assert Valid Phone Number
-    Enter The Otp Into The Input             Set The Otp From Api
+    ${otp}                                   get otp
+    Enter The Otp Into The Input             ${otp}
     Click On The Confirm Button
+    activate app locations
     Assert Valid Login
 
 login by wrong mobile number  # 09190

@@ -1,5 +1,5 @@
 platformName = "Android"
-deviceName = "emulator-5554"
+deviceName = "192.168.240.112:5555"
 appPackage = "com.zoodfood.express.stage"
 appActivity = "com.zoodfood.express.ui.login.LoginActivity"
 android_automation = "UIAutomator2"

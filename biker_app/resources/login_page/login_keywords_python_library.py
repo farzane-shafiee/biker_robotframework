@@ -1,4 +1,5 @@
 import requests
+from unidecode import unidecode
 from data_variables import username, mobile_number_valid
 
 BASE_URL = "https://express-api-staging.snappfood.dev"
@@ -52,5 +53,5 @@ def get_otp_from_api(token):
 
 
 def get_part_of_text(text):
-    print(text[25:37])
-    return text[25:37]
+    return unidecode(text[27:38])
+
