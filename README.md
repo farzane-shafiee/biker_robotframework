@@ -49,3 +49,5 @@ Usage
 
     run tests:
         robot -d biker_app/Results/ biker_app/
+
+Best Regards.
