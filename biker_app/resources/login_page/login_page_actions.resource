@@ -24,11 +24,6 @@ enter the otp into the input
     [Arguments]    ${otp}
     Input Text                          ${otp_input}              ${otp}
 
-get otp
-    ${token}                            Get Token
-    ${otp}                              Get Otp From Api          ${token}
-    RETURN      ${otp}
-
 click on the confirm button
     Click Element                       ${confirm_login_button}
 
