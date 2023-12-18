@@ -12,8 +12,7 @@ login by valid mobile number
     Enter The Phone Number Into The Input    ${mobile_number_valid}
     Click On The Continue Button
     Assert Valid Phone Number
-    ${otp}                                   get otp
-    Enter The Otp Into The Input             ${otp}
+    Enter The Otp Into The Input              ${otp_valid}
     Click On The Confirm Button
     activate app locations
     Assert Valid Login
