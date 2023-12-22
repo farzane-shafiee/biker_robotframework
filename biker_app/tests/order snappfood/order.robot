@@ -4,10 +4,12 @@ Resource       ../../resources/order_snappfood_page/order_snappfood_page_actions
 
 *** Test Cases ***
 Create order
-    ${code}                     create order snappfood
-    ${data}                     order list snappfood    ${code}
-    confirm order snappfood     ${data}
-    call biker from dakhl       ${data}
+    ${order_id}                 create orders
+    ${trip_id}               orders list dispatch       ${order_id}
+    ${biker_id}           bikers free list dispatch     ${trip_id}
 
+    IF    ${biker_id} != False
+        assign trip from dispatch           ${trip_id}
+    END
 
 
