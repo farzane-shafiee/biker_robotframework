@@ -20,6 +20,15 @@ assert valid phone number
     ${phone_number}                     Get Part Of Text          ${text_otp_page}
     Should be equal as strings          ${phone_number}           ${mobile_number_valid}
 
+get token
+    ${token}                            Get Token From Api
+    RETURN                              ${token}
+
+get otp
+    [Arguments]                         ${token}
+    ${otp}                              Get Otp From Api          ${token}
+    RETURN                              ${otp}
+
 enter the otp into the input
     [Arguments]    ${otp}
     Input Text                          ${otp_input}              ${otp}
