@@ -1,54 +1,52 @@
 *** Settings ***
-Library        AppiumLibrary
-Resource       ../../resources/base_config/base_config.robot
-Variables      ../../resources/login_page/data_variables.py
-Resource       ../../resources/login_page/login_valid.robot
-Resource       ../../resources/login_page/login_wrong_mobile_number.robot
-Resource       ../../resources/login_page/login_invalid_mobile_number.robot
-Resource       ../../resources/login_page/login_null_mobile_number.robot
-Resource       ../../resources/login_page/login_invalid_otp.robot
-Resource       ../../resources/login_page/login_null_otp.robot
+Resource       ../../resources/login_page/login_page_actions.resource
 
 Suite Setup       start suite
-Test Setup        start test case
-Test Teardown     end test case
+Test Setup        start biker app
+Test Teardown     close biker app
 Suite Teardown    end suite
 
-*** Variables ***
 *** Test Cases ***
+login by valid mobile number
+    [Documentation]    Login by valid mobile number is successfully.
+    Enter The Phone Number Into The Input    ${mobile_number_valid}
+    Click On The Continue Button
+    Assert Valid Phone Number
+    Enter The Otp Into The Input              ${otp_valid}
+    Click On The Confirm Button
+    activate app locations
+    Assert Valid Login
 
-test login valid
-    [Documentation]  login valid
-    [Tags]           regression
+login by wrong mobile number  # 09190
+    [Documentation]    Login by wrong mobile number and dees not login.
+    Enter The Phone Number Into The Input    ${mobile_number_wrong}
+    Click On The Continue Button
+    Assert Wrong Phone Number
 
-    Login Valid    ${mobile_number_valid}
+login by invalid mobile number  # 09150560098
+    [Documentation]    Login by invalid mobile number and dees not login.
+    Enter The Phone Number Into The Input    ${mobile_number_invalid}
+    Click On The Continue Button
+    Assert Invalid Phone Number
 
-test login - wrong mobile number  # 09190
-    [Documentation]  login - wrong mobile number
-    [Tags]           regression
+login by Null mobile number
+    [Documentation]    Login by null mobile number and dees not login.
+    Click On The Continue Button
+    Assert Wrong Phone Number
 
-    Login - Wrong Mobile Number    ${mobile_number_wrong}
+login by invalid otp
+    [Documentation]    Login by invalid OTP and dees not login.
+    Enter The Phone Number Into The Input    ${mobile_number_valid}
+    Click On The Continue Button
+    Assert Valid Phone Number
+    Enter The Otp Into The Input             ${otp_invalid}
+    Click On The Confirm Button
+    Assert Invalid Otp
 
-test login - invalid mobile number  # 09150560098
-    [Documentation]  login - invalid mobile number
-    [Tags]           regression
-
-    Login - Invalid Mobile Number    ${mobile_number_invalid}
-
-test login - Null mobile number
-    [Documentation]  login - Null mobile number
-    [Tags]           regression
-
-    Login - Null Mobile Number
-
-test login - invalid otp
-    [Documentation]  login - invalid OTP
-    [Tags]           regression
-
-    Login - Invalid Otp   ${mobile_number_valid}    ${otp_invalid}
-
-test login - Null Otp
-    [Documentation]  login - Null OTP
-    [Tags]           regression
-
-    Login - Null Otp    ${mobile_number_valid}
+login by Null Otp
+    [Documentation]    Login by null OTP and dees not login.
+    Enter The Phone Number Into The Input    ${mobile_number_valid}
+    Click On The Continue Button
+    Assert Valid Phone Number
+    Click On The Confirm Button
+    Assert Null Otp
