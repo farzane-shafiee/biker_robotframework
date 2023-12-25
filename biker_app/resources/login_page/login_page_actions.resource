@@ -40,16 +40,6 @@ assert valid login
     Wait Until Page Contains Element    ${assert_login_valid}
     Page Should Contain Element         ${assert_login_valid}
 
-activate app locations
-    Wait Until Page Contains Element    ${location_button}
-    Click Element                       ${location_button}
-    Wait Until Page Contains Element    ${location_button2}
-    Click Element                       ${location_button2}
-    Wait Until Page Contains Element    ${click_fake}
-    Click Element                       ${click_fake}
-    Click Element                       ${click_fake}
-    Click Element                       ${click_fake}
-
 assert wrong phone number
     Wait Until Page Contains Element    ${assert_username_invalid}
     Page Should Contain Element         ${assert_username_invalid}

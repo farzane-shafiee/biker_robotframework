@@ -16,7 +16,6 @@ login by valid mobile number
     ${otp}                                   get otp            ${token}
     Enter The Otp Into The Input             ${otp}
     Click On The Confirm Button
-    activate app locations
     Assert Valid Login
 
 login by wrong mobile number  # 09190
