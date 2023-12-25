@@ -150,13 +150,13 @@ def biker_free_list(trip_id, biker_mobile):
         return False
 
 
-def assign_trip(trip_id):
+def assign_trip(trip_id, biker_id):
     """
     Assign trip to biker free
-    :param trip_id
+    :param trip_id, biker_id
     """
     conn = http.client.HTTPSConnection("express-api-staging.snappfood.dev")
-    payload = f'tripId={trip_id}&userId=6875&canAssignTripToBikerAgain=false'
+    payload = f'tripId={trip_id}&userId={biker_id}&canAssignTripToBikerAgain=false'
     headers = {
         'authority': 'express-api-staging.snappfood.dev',
         'accept': 'application/json, text/plain, */*',
