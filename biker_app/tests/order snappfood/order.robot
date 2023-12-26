@@ -9,7 +9,7 @@ Create order
     ${biker_id}           bikers free list dispatch     ${trip_id}
 
     IF    ${biker_id} != False
-        assign trip from dispatch           ${trip_id}  ${biker_id}
+        assign trip from dispatch           ${trip_id}
     END
 
 

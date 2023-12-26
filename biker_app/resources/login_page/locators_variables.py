@@ -11,4 +11,3 @@ assert_username_invalid = 'com.zoodfood.express.stage:id/textinput_error'
 assert_otp_invalid = 'com.zoodfood.express.stage:id/txtErrorDialogText'
 
 assert_null_otp = '//*[@text="لطفا کد دریافت شده را وارد کنید"]'
-

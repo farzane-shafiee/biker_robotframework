@@ -21,7 +21,7 @@ assert valid phone number
     Should be equal as strings          ${phone_number}           ${mobile_number_valid}
 
 get token
-    ${token}                            Get Token From Api
+    ${token}                            Get Token From Api        ${username}   ${mobile_number_valid}
     RETURN                              ${token}
 
 get otp
@@ -57,3 +57,11 @@ assert invalid otp
 assert null otp
     Wait Until Page Contains Element    ${assert_null_otp}
     Page Should Contain Element         ${assert_null_otp}
+
+change state biker from api
+    [Arguments]                         ${state_biker}
+    Change State Biker                  ${biker_id}         ${state_biker}
+
+assert invalid login by deactive biker
+    Wait Until Page Contains            حساب کاربری شما مسدود شده است
+    Page Should Contain Text            حساب کاربری شما مسدود شده است

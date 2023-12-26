@@ -19,5 +19,5 @@ bikers free list dispatch
     RETURN                  ${biker_id}
 
 assign trip from dispatch
-    [Arguments]             ${trip_id}              ${biker_id}
+    [Arguments]             ${trip_id}
     Assign Trip             ${trip_id}              ${biker_id}

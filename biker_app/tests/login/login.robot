@@ -9,6 +9,7 @@ Suite Teardown    end suite
 *** Test Cases ***
 login by valid mobile number
     [Documentation]    Login by valid mobile number is successfully.
+    change state biker from api              ${state_biker_active}
     Enter The Phone Number Into The Input    ${mobile_number_valid}
     Click On The Continue Button
     Assert Valid Phone Number
@@ -51,3 +52,14 @@ login by Null Otp
     Assert Valid Phone Number
     Click On The Confirm Button
     Assert Null Otp
+
+change state biker
+    change state biker from api              ${state_biker_deactive}
+    Enter The Phone Number Into The Input    ${mobile_number_valid}
+    Click On The Continue Button
+    Assert Valid Phone Number
+    ${token}                                 get token
+    ${otp}                                   get otp            ${token}
+    Enter The Otp Into The Input             ${otp}
+    Click On The Confirm Button
+    assert invalid login by deactive biker
