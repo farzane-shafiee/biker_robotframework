@@ -12,9 +12,10 @@ login by valid mobile number
     Enter The Phone Number Into The Input    ${mobile_number_valid}
     Click On The Continue Button
     Assert Valid Phone Number
-    Enter The Otp Into The Input              ${otp_valid}
+    ${token}                                 get token
+    ${otp}                                   get otp            ${token}
+    Enter The Otp Into The Input             ${otp}
     Click On The Confirm Button
-    activate app locations
     Assert Valid Login
 
 login by wrong mobile number  # 09190

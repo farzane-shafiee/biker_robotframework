@@ -5,7 +5,7 @@ from data_variables import username, mobile_number_valid
 BASE_URL_EXPRESS = "https://express-api-staging.snappfood.dev"
 
 
-def get_token():
+def get_token_from_api():
     url = f"{BASE_URL_EXPRESS}/mobile/user/api-login"
 
     payload = f'password={mobile_number_valid}&username={username}'

@@ -20,6 +20,15 @@ assert valid phone number
     ${phone_number}                     Get Part Of Text          ${text_otp_page}
     Should be equal as strings          ${phone_number}           ${mobile_number_valid}
 
+get token
+    ${token}                            Get Token From Api
+    RETURN                              ${token}
+
+get otp
+    [Arguments]                         ${token}
+    ${otp}                              Get Otp From Api          ${token}
+    RETURN                              ${otp}
+
 enter the otp into the input
     [Arguments]    ${otp}
     Input Text                          ${otp_input}              ${otp}
@@ -30,16 +39,6 @@ click on the confirm button
 assert valid login
     Wait Until Page Contains Element    ${assert_login_valid}
     Page Should Contain Element         ${assert_login_valid}
-
-activate app locations
-    Wait Until Page Contains Element    ${location_button}
-    Click Element                       ${location_button}
-    Wait Until Page Contains Element    ${location_button2}
-    Click Element                       ${location_button2}
-    Wait Until Page Contains Element    ${click_fake}
-    Click Element                       ${click_fake}
-    Click Element                       ${click_fake}
-    Click Element                       ${click_fake}
 
 assert wrong phone number
     Wait Until Page Contains Element    ${assert_username_invalid}
