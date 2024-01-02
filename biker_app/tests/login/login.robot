@@ -1,10 +1,7 @@
 *** Settings ***
 Resource       ../../resources/login_page/login_page_actions.resource
 
-Suite Setup       start suite
 Test Setup        start biker app   ${server_name}    ${platform_name}   ${device_name}   ${app_package}   ${app_activity}  ${android_automation}   ${auto_grant_permissions}
-Test Teardown     close biker app
-Suite Teardown    end suite
 
 *** Test Cases ***
 login by valid mobile number
