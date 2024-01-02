@@ -1,3 +1,4 @@
+server_name = "localhost"
 platformName = "Android"
 deviceName = "192.168.240.112:5555"
 appPackage = "com.zoodfood.express.stage"

@@ -8,13 +8,15 @@ start suite
     Log To Console    ************* Start the Suite **************
 
 start biker app
-    [Tags]                        start test case
-    Open Application    http://localhost:4723/wd/hub
-    ...   platformName=${platformName}
-    ...   deviceName=${deviceName}
-    ...   appPackage=${appPackage}
-    ...   appActivity=${appActivity}
+    [Tags]              start test case
+    [Arguments]         ${server_name}    ${platform_name}   ${device_name}   ${app_package}   ${app_activity}  ${android_automation}   ${auto_grant_permissions}
+    Open Application    http://${server_name}:4723/wd/hub
+    ...   platformName=${platform_name}
+    ...   deviceName=${device_name}
+    ...   appPackage=${app_package}
+    ...   appActivity=${app_activity}
     ...   automationName=${android_automation}
+    ...   autoGrantPermissions=${auto_grant_permissions}
 
 close biker app
     Log To Console    ************* End the test **************
