@@ -7,7 +7,18 @@ import json
 
 BASE_URL_ZOODFOOD = "https://express-api-staging.zoodfood.com"
 BASE_URL = "https://express-api-staging.snappfood.dev"
-BASE_URL_DISPATCH = "https://express-ui-staging.zoodfood.com"
+
+
+def get_token_dispatch(username, password):
+    url = f"{BASE_URL}/mobile/user/api-login"
+
+    payload = f'password={password}&username={username}'
+    headers = {
+        'content-type': 'application/x-www-form-urlencoded'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+    return response.json()['token']
 
 
 def create_order():
@@ -70,9 +81,10 @@ def create_order():
     return order_id
 
 
-def order_list_dispatch(order_id):
+def order_list_dispatch(order_id, token):
     """
     check orders list and return order_id
+    :param token
     :param order_id
     :return: order_id
     """
@@ -80,20 +92,8 @@ def order_list_dispatch(order_id):
 
     payload = 'currentPage=0&tripStatus=REQUESTED'
     headers = {
-        'authority': 'express-api-staging.snappfood.dev',
-        'accept': 'application/json, text/plain, */*',
-        'accept-language': 'en-US,en;q=0.9,fa;q=0.8',
-        'authorization': 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJ1c2VybmFtZSI6ImYuc2hhZmllZSIsImlwX2ZpbHRlciI6ZmFsc2UsInN1cGVyX2FjY2VzcyI6ZmFsc2UsImxhc3RfZ3JhbnRlZF9hdCI6bnVsbCwiaWF0IjoxNzAyOTkwMjg4LCJleHAiOjE3MzQ1MjYyODh9.0iRs3wCoojiaXa47E_VB5HewlTrE9-D2BSEy3CZUgEUyQDMh6K1EYq3g46PEXcWYq8Ngf16m3HUjWXr-itgTAbbRzpOsii95bM_Nnw_-KCSYXJ6DTi3vskTl0pX1rhpfzevPbYZilPO1NB_4BhiFZi3J7_l6SMTAY-gwVS-rtb38smO00gnp_0OrCO9XCH3X8TqHpZNAks-o8vYtd5Lv-hcLfkXgCyL30WJneOk6-aEsWAM_kZeMURu_WMpMMv_tXfe7VSXjPptawbRMBtcXvvgO6iKwwZq-EBszQrQ-fYhWppSKYVJD0194-VRh_qZjtw1ZlYz0hExRMf3aXMlpKzHZ7BWU1tYFmasXmOLnZWs_X7FgRdWBLu2436QOA2FfjX1mXgNlfzF7R_QDzHmbx2DYYjierRleGvbxdXf_YHIaHn1hsZRcCoXxiQ7fF67p87WXs_NqzDHyCYPJeWdIZ0J3__AF395886vBQgUSZ5y1Vlr4e9tRQDUVNqvNp6wQktgSr4BtjfOw7n6ku4E9NpFxMVoKEt839TJOn0sY9G687Wz9Yvk3VawdO5xRkTANmsSblxoauhIEfFa3030FyaAurMKTO9KOFEhPD7OGu-Pf9K_qjSMq1mKH_FjtRVnYcJenB2dcGKNeURsl-2fX0SLnIo-MUesJKbIyVFA6uic',
-        'content-type': 'application/x-www-form-urlencoded',
-        'origin': f'{BASE_URL_DISPATCH}',
-        'referer': f'{BASE_URL_DISPATCH}/',
-        'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Linux"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'cross-site',
-        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        'authorization': f'Bearer {token}',
+        'content-type': 'application/x-www-form-urlencoded'
     }
     response = requests.request("POST", url, headers=headers, data=payload)
     for item in response.json()["trips"]:  # بررسی لیست سفرها و پیدا کردن order_id
@@ -105,10 +105,11 @@ def order_list_dispatch(order_id):
         return False
 
 
-def biker_free_list(trip_id, biker_mobile):
+def biker_free_list(trip_id, biker_mobile, token_dispatch):
     """
     check biker free list and return biker_id
-    :param trip_id:
+    :param token_dispatch
+    :param trip_id
     :param biker_mobile: get from data_variables file
     :return: biker_id
     """
@@ -116,20 +117,8 @@ def biker_free_list(trip_id, biker_mobile):
 
     payload = f'tripId={trip_id}'
     headers = {
-        'authority': 'express-api-staging.snappfood.dev',
-        'accept': 'application/json, text/plain, */*',
-        'accept-language': 'en-US,en;q=0.9,fa;q=0.8',
-        'authorization': 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJ1c2VybmFtZSI6ImYuc2hhZmllZSIsImlwX2ZpbHRlciI6ZmFsc2UsInN1cGVyX2FjY2VzcyI6ZmFsc2UsImxhc3RfZ3JhbnRlZF9hdCI6bnVsbCwiaWF0IjoxNzAyOTkwMjg4LCJleHAiOjE3MzQ1MjYyODh9.0iRs3wCoojiaXa47E_VB5HewlTrE9-D2BSEy3CZUgEUyQDMh6K1EYq3g46PEXcWYq8Ngf16m3HUjWXr-itgTAbbRzpOsii95bM_Nnw_-KCSYXJ6DTi3vskTl0pX1rhpfzevPbYZilPO1NB_4BhiFZi3J7_l6SMTAY-gwVS-rtb38smO00gnp_0OrCO9XCH3X8TqHpZNAks-o8vYtd5Lv-hcLfkXgCyL30WJneOk6-aEsWAM_kZeMURu_WMpMMv_tXfe7VSXjPptawbRMBtcXvvgO6iKwwZq-EBszQrQ-fYhWppSKYVJD0194-VRh_qZjtw1ZlYz0hExRMf3aXMlpKzHZ7BWU1tYFmasXmOLnZWs_X7FgRdWBLu2436QOA2FfjX1mXgNlfzF7R_QDzHmbx2DYYjierRleGvbxdXf_YHIaHn1hsZRcCoXxiQ7fF67p87WXs_NqzDHyCYPJeWdIZ0J3__AF395886vBQgUSZ5y1Vlr4e9tRQDUVNqvNp6wQktgSr4BtjfOw7n6ku4E9NpFxMVoKEt839TJOn0sY9G687Wz9Yvk3VawdO5xRkTANmsSblxoauhIEfFa3030FyaAurMKTO9KOFEhPD7OGu-Pf9K_qjSMq1mKH_FjtRVnYcJenB2dcGKNeURsl-2fX0SLnIo-MUesJKbIyVFA6uic',
-        'content-type': 'application/x-www-form-urlencoded',
-        'origin': f'{BASE_URL_DISPATCH}',
-        'referer': f'{BASE_URL_DISPATCH}/',
-        'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Linux"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'cross-site',
-        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        'authorization': f'Bearer {token_dispatch}',
+        'content-type': 'application/x-www-form-urlencoded'
     }
 
     response = requests.request("POST", url, headers=headers, data=payload)
@@ -144,28 +133,17 @@ def biker_free_list(trip_id, biker_mobile):
         return False
 
 
-def assign_trip(trip_id):
+def assign_trip(trip_id, token_dispatch):
     """
     Assign trip to biker free
+    :param token_dispatch
     :param trip_id
     """
     url = f"{BASE_URL}/trip/assign-trip"
 
     payload = f'tripId={trip_id}&userId=6875&canAssignTripToBikerAgain=false'
     headers = {
-        'authority': 'express-api-staging.snappfood.dev',
-        'accept': 'application/json, text/plain, */*',
-        'accept-language': 'en-US,en;q=0.9,fa;q=0.8',
-        'authorization': 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJ1c2VybmFtZSI6ImYuc2hhZmllZSIsImlwX2ZpbHRlciI6ZmFsc2UsInN1cGVyX2FjY2VzcyI6ZmFsc2UsImxhc3RfZ3JhbnRlZF9hdCI6bnVsbCwiaWF0IjoxNzAyOTkwMjg4LCJleHAiOjE3MzQ1MjYyODh9.0iRs3wCoojiaXa47E_VB5HewlTrE9-D2BSEy3CZUgEUyQDMh6K1EYq3g46PEXcWYq8Ngf16m3HUjWXr-itgTAbbRzpOsii95bM_Nnw_-KCSYXJ6DTi3vskTl0pX1rhpfzevPbYZilPO1NB_4BhiFZi3J7_l6SMTAY-gwVS-rtb38smO00gnp_0OrCO9XCH3X8TqHpZNAks-o8vYtd5Lv-hcLfkXgCyL30WJneOk6-aEsWAM_kZeMURu_WMpMMv_tXfe7VSXjPptawbRMBtcXvvgO6iKwwZq-EBszQrQ-fYhWppSKYVJD0194-VRh_qZjtw1ZlYz0hExRMf3aXMlpKzHZ7BWU1tYFmasXmOLnZWs_X7FgRdWBLu2436QOA2FfjX1mXgNlfzF7R_QDzHmbx2DYYjierRleGvbxdXf_YHIaHn1hsZRcCoXxiQ7fF67p87WXs_NqzDHyCYPJeWdIZ0J3__AF395886vBQgUSZ5y1Vlr4e9tRQDUVNqvNp6wQktgSr4BtjfOw7n6ku4E9NpFxMVoKEt839TJOn0sY9G687Wz9Yvk3VawdO5xRkTANmsSblxoauhIEfFa3030FyaAurMKTO9KOFEhPD7OGu-Pf9K_qjSMq1mKH_FjtRVnYcJenB2dcGKNeURsl-2fX0SLnIo-MUesJKbIyVFA6uic',
-        'content-type': 'application/x-www-form-urlencoded',
-        'origin': f'{BASE_URL_DISPATCH}',
-        'referer': f'{BASE_URL_DISPATCH}/',
-        'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Linux"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'cross-site',
-        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        'authorization': f'Bearer {token_dispatch}',
+        'content-type': 'application/x-www-form-urlencoded'
     }
     requests.request("POST", url, headers=headers, data=payload)

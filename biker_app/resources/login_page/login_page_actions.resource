@@ -16,7 +16,7 @@ click on the continue button
 
 assert valid phone number
     Wait Until Page Contains Element    ${phone_number_label_login}
-    ${text_locator}                    Get Text                   ${phone_number_label_login}
+    ${text_locator}                     Get Text                   ${phone_number_label_login}
     ${phone_number}                     Get Part Of Text          ${text_locator}
     Should be equal as strings          ${phone_number}           ${mobile_number_valid}
 

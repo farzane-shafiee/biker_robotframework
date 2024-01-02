@@ -10,18 +10,8 @@ def get_token_from_api():
 
     payload = f'password={mobile_number_valid}&username={username}'
     headers = {
-        'Accept': 'application/json, text/plain, */*',
-        'Accept-Language': 'en-US,en;q=0.9,fa;q=0.8',
-        'Connection': 'keep-alive',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Origin': 'https://express-ui-staging.zoodfood.com',
-        'Referer': 'https://express-ui-staging.zoodfood.com/',
-        'Sec-Fetch-Dest': 'empty',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'cross-site',
-        'sec-ch-ua-mobile': '?0',
+        'Content-Type': 'application/x-www-form-urlencoded'
     }
-
     response = requests.request("POST", url, headers=headers, data=payload)
     token = response.json()['token']
     return token
@@ -32,22 +22,9 @@ def get_otp_from_api(token):
 
     payload = {}
     headers = {
-        'Accept': 'application/json, text/plain, */*',
-        'Accept-Language': 'en-US,en;q=0.9,fa;q=0.8',
         'Authorization': F'Bearer {token}',
-        'Connection': 'keep-alive',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Origin': 'https://express-ui-staging.zoodfood.com',
-        'Referer': 'https://express-ui-staging.zoodfood.com/',
-        'Sec-Fetch-Dest': 'empty',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'cross-site',
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',
-        'sec-ch-ua': '"Chromium";v="118", "Google Chrome";v="118", "Not=A?Brand";v="99"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Linux"'
+        'Content-Type': 'application/x-www-form-urlencoded'
     }
-
     response = requests.request("GET", url, headers=headers, data=payload)
     return response.json()['lastOtps']
 
