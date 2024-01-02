@@ -15,7 +15,7 @@ def get_token(username, mobile_number_valid):
     return token
 
 
-def get_otp_from_api(token, biker_id):
+def get_otp(token, biker_id):
     url = f"{BASE_URL_EXPRESS}/biker/show-biker-last-otps/{biker_id}"
 
     payload = {}
