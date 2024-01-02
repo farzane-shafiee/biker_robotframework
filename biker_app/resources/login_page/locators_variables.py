@@ -1,14 +1,14 @@
-phone_number_input = 'com.zoodfood.express.stage:id/lyt_login_txtPhone'
-cross_button = 'com.zoodfood.express.stage:id/text_input_start_icon'
-continue_button = 'com.zoodfood.express.stage:id/activity_login_txtAction'
-otp_page_label = 'com.zoodfood.express.stage:id/lyt_login_verification_txtTitle'
-otp_input = 'com.zoodfood.express.stage:id/lyt_login_verification_edt'
-confirm_login_button = 'com.zoodfood.express.stage:id/activity_login_txtAction'
+phone_number_input_login = 'com.zoodfood.express.stage:id/lyt_login_txtPhone'
+cross_button_login = 'com.zoodfood.express.stage:id/text_input_start_icon'
+continue_button_login = 'com.zoodfood.express.stage:id/activity_login_txtAction'
+phone_number_label_login = 'com.zoodfood.express.stage:id/lyt_login_verification_txtTitle'
+otp_input_login = 'com.zoodfood.express.stage:id/lyt_login_verification_edt'
+confirm_button_login = 'com.zoodfood.express.stage:id/activity_login_txtAction'
 
-assert_login_valid = '//*[@text="درآمد امروز"]'
+today_income_button_login = '//*[@text="درآمد امروز"]'
 
-assert_username_invalid = 'com.zoodfood.express.stage:id/textinput_error'
-assert_otp_invalid = 'com.zoodfood.express.stage:id/txtErrorDialogText'
+notification_invalid_phone_numner = 'com.zoodfood.express.stage:id/textinput_error'
+notification_invalid_otp = 'com.zoodfood.express.stage:id/txtErrorDialogText'
 
-assert_null_otp = '//*[@text="لطفا کد دریافت شده را وارد کنید"]'
+notification_null_otp = '//*[@text="لطفا کد دریافت شده را وارد کنید"]'
 
