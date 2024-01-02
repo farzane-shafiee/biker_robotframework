@@ -1,6 +1,7 @@
 *** Settings ***
 Variables      locators_variables.py
 Variables      data_variables.py
+Variables      ../base_config/base_variables
 Resource       ../base_config/base_config.resource
 Library        ${CURDIR}/login_keywords_python_library.py
 
@@ -16,22 +17,23 @@ click on the continue button
 
 assert valid phone number
     Wait Until Page Contains Element    ${phone_number_label_login}
-    ${text_locator}                     Get Text                   ${phone_number_label_login}
-    ${phone_number}                     Get Part Of Text          ${text_locator}
-    Should be equal as strings          ${phone_number}           ${mobile_number_valid}
+    ${text_locator}                     Get Text                        ${phone_number_label_login}
+    ${phone_number}                     Get Part Of Text                ${text_locator}
+    Should be equal as strings          ${phone_number}                 ${mobile_number_valid}
 
-get token
-    ${token}                            Get Token From Api
+Get Token From Api
+    [Arguments]                         ${username}    ${password}
+    ${token}                            Get Token      ${username}    ${password}
     RETURN                              ${token}
 
 get otp
-    [Arguments]                         ${token}
-    ${otp}                              Get Otp From Api          ${token}
+    [Arguments]                         ${token}                        ${biker_id}
+    ${otp}                              Get Otp From Api                ${token}      ${biker_id}
     RETURN                              ${otp}
 
 enter the otp into the input
     [Arguments]    ${otp}
-    Input Text                          ${otp_input_login}        ${otp}
+    Input Text                          ${otp_input_login}              ${otp}
 
 click on the confirm button
     Click Element                       ${confirm_button_login}

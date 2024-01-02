@@ -9,18 +9,6 @@ BASE_URL_ZOODFOOD = "https://express-api-staging.zoodfood.com"
 BASE_URL = "https://express-api-staging.snappfood.dev"
 
 
-def get_token_dispatch(username, password):
-    url = f"{BASE_URL}/mobile/user/api-login"
-
-    payload = f'password={password}&username={username}'
-    headers = {
-        'content-type': 'application/x-www-form-urlencoded'
-    }
-
-    response = requests.request("POST", url, headers=headers, data=payload)
-    return response.json()['token']
-
-
 def create_order():
     """
     Creates an order
@@ -133,15 +121,16 @@ def biker_free_list(trip_id, biker_mobile, token_dispatch):
         return False
 
 
-def assign_trip(trip_id, token_dispatch):
+def assign_trip(trip_id, token_dispatch, biker_id):
     """
     Assign trip to biker free
+    :param biker_id
     :param token_dispatch
     :param trip_id
     """
     url = f"{BASE_URL}/trip/assign-trip"
 
-    payload = f'tripId={trip_id}&userId=6875&canAssignTripToBikerAgain=false'
+    payload = f'tripId={trip_id}&userId={biker_id}&canAssignTripToBikerAgain=false'
     headers = {
         'authorization': f'Bearer {token_dispatch}',
         'content-type': 'application/x-www-form-urlencoded'

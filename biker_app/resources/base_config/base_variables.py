@@ -5,3 +5,5 @@ app_package = "com.zoodfood.express.stage"
 app_activity = "com.zoodfood.express.ui.login.LoginActivity"
 android_automation = "UIAutomator2"
 auto_grant_permissions = "true"
+
+biker_id = "6875"

@@ -9,8 +9,8 @@ login by valid mobile number
     Enter The Phone Number Into The Input    ${mobile_number_valid}
     Click On The Continue Button
     Assert Valid Phone Number
-    ${token}                                 get token
-    ${otp}                                   get otp            ${token}
+    ${token}                                 Get Token From Api    ${username}    ${mobile_number_valid}
+    ${otp}                                   get otp               ${token}       ${biker_id}
     Enter The Otp Into The Input             ${otp}
     Click On The Confirm Button
     Assert Valid Login

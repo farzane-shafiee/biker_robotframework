@@ -1,11 +1,10 @@
 import requests
 from unidecode import unidecode
-from data_variables import username, mobile_number_valid
 
 BASE_URL_EXPRESS = "https://express-api-staging.snappfood.dev"
 
 
-def get_token_from_api():
+def get_token(username, mobile_number_valid):
     url = f"{BASE_URL_EXPRESS}/mobile/user/api-login"
 
     payload = f'password={mobile_number_valid}&username={username}'
@@ -17,12 +16,12 @@ def get_token_from_api():
     return token
 
 
-def get_otp_from_api(token):
-    url = F"{BASE_URL_EXPRESS}/biker/show-biker-last-otps/6875"
+def get_otp_from_api(token, biker_id):
+    url = f"{BASE_URL_EXPRESS}/biker/show-biker-last-otps/{biker_id}"
 
     payload = {}
     headers = {
-        'Authorization': F'Bearer {token}',
+        'Authorization': f'Bearer {token}',
         'Content-Type': 'application/x-www-form-urlencoded'
     }
     response = requests.request("GET", url, headers=headers, data=payload)
