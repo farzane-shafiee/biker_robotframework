@@ -5,11 +5,6 @@ Variables      data_variables.py
 Variables      ../base_config/base_variables
 
 *** Keywords ***
-Get Token From Api
-    [Arguments]             ${username_dispatch}    ${password_dispatch}
-    ${token_dispatch}       Get Token               ${username_dispatch}    ${password_dispatch}
-    RETURN                  ${token_dispatch}
-
 Evaluate Time Stamp
     ${timestamp}=           Evaluate                calendar.timegm(time.gmtime())
     RETURN                  ${timestamp}

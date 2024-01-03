@@ -1,6 +1,7 @@
 *** Settings ***
 Library        String
 Resource       ../../resources/order_snappfood_page/order_snappfood_page_actions.resource
+Resource       ../../resources/login_page/login_page_actions.resource
 
 *** Test Cases ***
 Create order
