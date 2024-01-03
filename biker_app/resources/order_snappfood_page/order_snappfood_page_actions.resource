@@ -10,21 +10,21 @@ Get Token From Api
     ${token_dispatch}       Get Token               ${username_dispatch}    ${password_dispatch}
     RETURN                  ${token_dispatch}
 
-create orders
+Create Orders
     ${order_id}             Create Order
     Sleep                   5s
     RETURN                  ${order_id}
 
-orders list dispatch
+Orders List Dispatch
     [Arguments]             ${order_id}             ${token}
-    ${trip_id}              Order List Dispatch     ${order_id}     ${token}
+    ${trip_id}              Order List Dispatch     ${order_id}             ${token}
     RETURN                  ${trip_id}
 
-bikers free list dispatch
+Bikers Free List Dispatch
     [Arguments]             ${trip_id}              ${token_dispatch}
-    ${biker_id}             Biker Free List         ${trip_id}      ${biker_mobile}     ${token_dispatch}
+    ${biker_id}             Biker Free List         ${trip_id}              ${biker_mobile}     ${token_dispatch}
     RETURN                  ${biker_id}
 
-assign trip from dispatch
+Assign Trip From Dispatch
     [Arguments]             ${trip_id}              ${token_dispatch}       ${biker_id}
     Assign Trip             ${trip_id}              ${token_dispatch}       ${biker_id}

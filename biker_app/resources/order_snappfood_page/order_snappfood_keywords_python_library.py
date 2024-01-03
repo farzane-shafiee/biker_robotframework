@@ -14,8 +14,7 @@ def create_order():
     Creates an order
     :return: order_id
     """
-    current_GMT = time.gmtime()
-    time_stamp = calendar.timegm(current_GMT)  # create time stamp
+    time_stamp = calendar.timegm(time.gmtime())  # create time stamp
 
     code = ''.join(random.choices(string.ascii_lowercase +
                                   string.digits, k=7))  # create code from characters 7
