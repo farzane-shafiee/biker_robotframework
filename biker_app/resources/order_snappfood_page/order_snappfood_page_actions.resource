@@ -10,8 +10,13 @@ Get Token From Api
     ${token_dispatch}       Get Token               ${username_dispatch}    ${password_dispatch}
     RETURN                  ${token_dispatch}
 
-Create Orders
-    ${order_id}             Create Order
+Evaluate Time Stamp
+    ${timestamp}=           Evaluate                calendar.timegm(time.gmtime())
+    RETURN                  ${timestamp}
+
+Create Orders In Dispatch
+    [Arguments]             ${string_code}          ${number_code}          ${time_stamp}
+    ${order_id}             Create Order            ${string_code}          ${number_code}      ${time_stamp}
     Sleep                   5s
     RETURN                  ${order_id}
 

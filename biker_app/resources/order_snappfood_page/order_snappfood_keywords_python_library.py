@@ -1,7 +1,3 @@
-import random
-import string
-import time
-import calendar
 import requests
 import json
 
@@ -9,22 +5,16 @@ BASE_URL_ZOODFOOD = "https://express-api-staging.zoodfood.com"
 BASE_URL = "https://express-api-staging.snappfood.dev"
 
 
-def create_order():
+def create_order(string_code, number_code, time_stamp):
     """
     Creates an order
     :return: order_id
     """
-    time_stamp = calendar.timegm(time.gmtime())  # create time stamp
-
-    code = ''.join(random.choices(string.ascii_lowercase +
-                                  string.digits, k=7))  # create code from characters 7
-    order_id = ''.join(["{}".format(random.randint(1, 9)) for num in range(1, 8)])  # create order_id 8 number
-
     url = f"{BASE_URL_ZOODFOOD}/client/trip/create"
 
     payload = json.dumps({
         "preOrder": True,
-        "code": code,
+        "code": string_code,
         "source": {
             "title": "وندور تست اتومیشن",
             "address": "آدرس وندور",
@@ -49,7 +39,7 @@ def create_order():
             "rank": "برنز"
         },
         "order": "تست کباب-1-13000",
-        "orderId": order_id,
+        "orderId": number_code,
         "time_to_arrive": time_stamp,
         "statusDate": time_stamp,
         "creationTime": time_stamp,
@@ -65,7 +55,7 @@ def create_order():
         'Authorization': 'Bearer eyJhbGciOiJSUzI1NiJ9.eyJjbGllbnQiOiJzbmFwcGZvb2QiLCJleHAiOjE4NjIyOTY2OTIsImlhdCI6MTU0NjY3NzQ5Mn0.LeDJ5VHKE5mvsrvp-nAef1X-N9FTO_38FyazrjSMcpIRXkDYXtZ9Axr7mxKsnWtnnCneKKJmDsrm7yOgfwOpIIznVkaqT--UJPVsR0sQy8DtZkX2Spr2F4VCz8XyFw5sOhSsWDE5ag-IK31WMRwxNL1_Iksh_5Y56QwLgndWG-p30gMrYbyfWTMldGeLOE9D2l6Pmg5Ih1NM19dOcqLPubvHI9z2Gm8xYrpquXBT0GsQQVYAMI2g26RFnDTgVALm8yZr88vdIh7qrNKeouR_BHqeZUBASKChfCvGN4sRGmJgFvCYGUrsgvq25MhTrqUADAZx6HQDGRrRNhQJ8Hm3mO14nyuLRBu9zoJXs-cFxupEZWN0wnxyVZdg-nId0Z_vGOv9l_yg8DMESv7fMPWsYGmoaFb1QmhcUS9LHQw4xWmJZjYLy22i-2gXDUmLFCC2EjaHv-wa1bfNd5DMTLUySLy7wUrhO10rMM10sT4n75NTHd6pGbHumzaDTVidJwcyx_ilDn6PScy0NFbsmJf8xqvriY6HBxPo-QK8UGtJpJWZYzGeiD81fVE3rx169FnP9xgO-n-Ar3Lw7LWgAr-fSnQzZmxY8b0hf5MOy2K3t09zCy66kclcJRtyGkBemDwQ3oxL7JEsxgOTTFwBOTw438KqZvQT74NofEbR8WzXqVg'
     }
     requests.request("POST", url, headers=headers, data=payload)
-    return order_id
+    return number_code
 
 
 def order_list_dispatch(order_id, token):
