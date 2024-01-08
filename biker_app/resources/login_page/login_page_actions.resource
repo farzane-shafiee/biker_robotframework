@@ -10,9 +10,11 @@ Library        ${CURDIR}/login_keywords_python_library.py
 Enter The Phone Number Into The Input
     [Arguments]                         ${phone_number}
     Input Text                          ${phone_number_input_login}     ${phone_number}
+    Wait Until Page Contains Element    ${cross_button_login}
 
 Click On The Continue Button
     Click Element                       ${continue_button_login}
+    Sleep    1
 
 Get Phone Number From Text
     ${text_locator}     Get Text        ${phone_number_label_login}
