@@ -2,6 +2,7 @@
 Resource       ../../resources/login_page/login_page_actions.resource
 
 Test Setup        start biker app   ${server_name}    ${platform_name}   ${device_name}   ${app_package}   ${app_activity}  ${android_automation}   ${auto_grant_permissions}
+Library    ../../resources/login_page/login_keywords_python_library.py
 
 *** Test Cases ***
 login by valid mobile number
@@ -15,8 +16,8 @@ login by valid mobile number
     ${phone_number}                          Get Phone Number From Text
     ${persian_phone_number}                  Convert Persian Numerals                ${phone_number}
     Should be equal as strings               ${persian_phone_number}                 ${mobile_number_valid}
-    ${token}                                 Get Token From Api       ${username}    ${mobile_number_valid}
-    ${otp}                                   Get Otp From Api         ${token}       ${biker_id}
+    ${token}                                 Get Token                               ${username}    ${mobile_number_valid}
+    ${otp}                                   Get Otp                                 ${token}       ${biker_id}
     Enter The Otp Into The Input             ${otp}
     Click On The Confirm Button
 

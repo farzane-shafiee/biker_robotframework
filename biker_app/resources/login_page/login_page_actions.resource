@@ -24,16 +24,6 @@ Convert Persian Numerals
     ${converted_text}=    Evaluate      "${persian_text}".replace('۰', '0').replace('۱', '1').replace('۲', '2').replace('۳', '3').replace('۴', '4').replace('۵', '5').replace('۶', '6').replace('۷', '7').replace('۸', '8').replace('۹', '9')
     RETURN                              ${converted_text}
 
-Get Token From Api
-    [Arguments]                         ${username}    ${password}
-    ${token}                            Get Token      ${username}    ${password}
-    RETURN                              ${token}
-
-Get Otp From Api
-    [Arguments]                         ${token}       ${biker_id}
-    ${otp}                              Get Otp        ${token}      ${biker_id}
-    RETURN                              ${otp}
-
 Enter The Otp Into The Input
     [Arguments]    ${otp}
     Input Text                          ${otp_input_login}           ${otp}
